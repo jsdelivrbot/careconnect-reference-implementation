@@ -1,0 +1,9 @@
+FROM library/mysql
+
+COPY wait.sh /usr/local/bin/wait.sh
+USER root
+RUN chmod 777 /usr/local/bin/wait.sh
+USER mysql
+
+CMD /usr/local/bin/wait.sh
+
