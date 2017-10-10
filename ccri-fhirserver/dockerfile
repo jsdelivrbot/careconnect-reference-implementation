@@ -10,8 +10,16 @@ ADD server.xml /usr/local/tomcat/conf/server.xml
 # ADD hawtio.war /usr/local/tomcat/webapps/
 ADD target/careconnect-ri.war /usr/local/tomcat/webapps/
 
+ADD start-server.sh start-server.sh
+RUN chmod 777 start-server.sh
+
+# Install MySql Client to ensure that MySql server is initialised before starting Tomcat server
+RUN apt-get update
+
+RUN apt-get install -y mysql-client
 
 # See CareConnectAPI for details on pulling and running docker images https://care-connect-api.netlify.com/ccri_docker.html
 
-CMD ["catalina.sh", "run"]
+#CMD ["catalina.sh", "run"]
+CMD ["./start-server.sh"]
 

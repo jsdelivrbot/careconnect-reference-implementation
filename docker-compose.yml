@@ -6,7 +6,6 @@ services:
     image: thorlogic/ccri-fhirserver:${CCRI_VERSION}
     depends_on:
       - ccrisql
-      - ccrisql_startup
     links:
       - ccrisql
     environment:
@@ -42,13 +41,6 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
-
-  ccrisql_startup:
-    container_name: ccrisql_startup
-    build: mysql_startup
-    image: thorlogic/ccri-mysql-wait:${CCRI_VERSION}
-    links:
-      - ccrisql
 
   elk:
     build: elk
