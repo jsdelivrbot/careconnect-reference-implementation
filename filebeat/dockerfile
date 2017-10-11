@@ -6,3 +6,4 @@ USER filebeat
 
 # Add CA Certficate to allow FileBeat to trust Logstash - Cert Downloaded from
 COPY logstash-beats.crt /etc/pki/tls/certs/logstash-beats.crt
+exit
