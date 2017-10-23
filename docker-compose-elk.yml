@@ -25,9 +25,66 @@ services:
     networks:
       - elknet
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: monitoring_prometheus
+    restart: unless-stopped
+    volumes:
+      - ./data/prometheus/config:/etc/prometheus/
+      - ./data/prometheus/data:/prometheus
+    command:
+      - '-config.file=/etc/prometheus/prometheus.yml'
+      - '-storage.local.path=/prometheus'
+      - '-alertmanager.url=http://alertmanager:9093'
+    expose:
+      - 9090
+    ports:
+      - 9090:9090
+    links:
+      - cadvisor:cadvisor
+      - node-exporter:node-exporter
+    networks:
+      - elknet
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: monitoring_node_exporter
+    restart: unless-stopped
+    expose:
+      - 9100
+    networks:
+      - elknet
+
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: monitoring_cadvisor
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    expose:
+      - 8080
+    networks:
+      - elknet
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - grafana-data-volume:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - elk
+      - prometheus
+    networks:
+      - elknet
+
 volumes:
   tomcat-log-volume:
   gateway-log-volume:
+  grafana-data-volume:
 
 networks:
   elknet:
