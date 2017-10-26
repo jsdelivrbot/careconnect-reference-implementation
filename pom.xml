@@ -119,35 +119,6 @@
                         </execution>
                     </executions>
                 </plugin>
-                <plugin>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.6.0</version>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <executions>
-                        <execution><!-- Run our Build Docker Images script -->
-                            <id>Build Docker Images</id>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>install</goal>
-                            </goals>
-                            <configuration>
-                                <executable>bash</executable>
-                                <commandlineArgs>buildDocker.sh</commandlineArgs>
-                            </configuration>
-                        </execution>
-                        <execution><!-- Run our version calculation script -->
-                            <id>Push Docker Images</id>
-                            <phase>deploy</phase>
-                            <goals>
-                                <goal>deploy</goal>
-                            </goals>
-                            <configuration>
-                                <executable>bash</executable>
-                                <commandlineArgs>publishDocker.sh</commandlineArgs>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
 
         </pluginManagement>
