@@ -125,7 +125,7 @@
                             <id>Build Docker Images</id>
                             <phase>install</phase>
                             <goals>
-                                <goal>exec</goal>
+                                <goal>install</goal>
                             </goals>
                             <configuration>
                                 <executable>bash</executable>
@@ -136,7 +136,7 @@
                             <id>Push Docker Images</id>
                             <phase>deploy</phase>
                             <goals>
-                                <goal>exec</goal>
+                                <goal>deploy</goal>
                             </goals>
                             <configuration>
                                 <executable>bash</executable>
