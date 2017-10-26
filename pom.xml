@@ -125,7 +125,7 @@
                             <id>Build Docker Images</id>
                             <phase>install</phase>
                             <goals>
-                                <goal>install</goal>
+                                <goal>install:install</goal>
                             </goals>
                             <configuration>
                                 <executable>bash</executable>
