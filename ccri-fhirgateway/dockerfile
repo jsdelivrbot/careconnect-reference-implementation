@@ -9,13 +9,15 @@ ADD google3eacf3dd7222ac95.html /usr/local/tomcat/webapps/ROOT/google3eacf3dd722
 ADD robots.txt /usr/local/tomcat/webapps/ROOT/robots.txt
 ADD logging.properties /usr/local/tomcat/conf/logging.properties
 ADD server.xml /usr/local/tomcat/conf/server.xml
+ADD .keystore /usr/local/tomcat/.keystore
 
 # ADD hawtio.war /usr/local/tomcat/webapps/
 
-ADD target/careconnect-gateway.war /usr/local/tomcat/webapps/careconnect-ri.war
-
 # See CareConnectAPI for details on pulling and running docker images https://care-connect-api.netlify.com/ccri_docker.html
 EXPOSE 80
+EXPOSE 8443
+
+ADD target/careconnect-gateway.war /usr/local/tomcat/webapps/careconnect-ri.war
 
 CMD ["catalina.sh", "run"]
 
